@@ -29,7 +29,7 @@ void myMessageHandler(QtMsgType type, const QMessageLogContext &context, const Q
     QMutexLocker locker(&logMutex);
 
     QString timeStamp = QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss");
-    QString logMessage = QString("[%1]%2 %3 (%4:%5)")
+    QString logMessage = QString("[%1]%2 %3")
                              .arg(timeStamp)
                              .arg([&]{
                                  switch(type) {
@@ -41,9 +41,11 @@ void myMessageHandler(QtMsgType type, const QMessageLogContext &context, const Q
                                  default: return "UNK";
                                  }
                              }())
-                             .arg(msg)
-                             .arg(context.file ? context.file : "")
-                             .arg(context.line);
+                             .arg(msg);
+
+    if(type != QtDebugMsg && type < QtInfoMsg) {
+        logMessage += QString(" (%1:%2)").arg(context.file ? context.file : "").arg(context.line);
+    }
 
     // Always log everything to debug log
     if(debugLogFile.isOpen()) {
