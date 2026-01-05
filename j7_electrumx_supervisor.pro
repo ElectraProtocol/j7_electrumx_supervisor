@@ -22,11 +22,11 @@ VERSION = 1.0.0
 DEFINES += SUPERVISOR_VERSION=\\\"$${VERSION}\\\"
 
 HEADERS += \
-    electrumxsupervisor.h
+    src/electrumxsupervisor.h
 
 SOURCES += \
-    electrumxsupervisor.cpp \
-    main.cpp
+    src/electrumxsupervisor.cpp \
+    src/main.cpp
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
