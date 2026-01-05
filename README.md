@@ -104,8 +104,8 @@ export DAEMON_URL="http://user:pass@127.0.0.1:PORT"
 export NET=mainnet
 export DB_ENGINE=leveldb
 
-# Recommended: bind local services (Nginx can expose public ports)
-export SERVICES="tcp://127.0.0.1:50001,ws://127.0.0.1:50003,rpc://"
+# (Nginx) Recommended: bind local services and update internal ports to 51001 and 51003 to not get a conflict with Nginx which is listening on 50001 and 50003 already
+export SERVICES="tcp://127.0.0.1:51001,ws://127.0.0.1:51003,rpc://"
 
 ulimit -n 10000
 
